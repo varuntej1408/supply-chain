@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
 
 
 import pandas as pd
@@ -14,20 +10,17 @@ data = pd.read_csv("supply_chain_data.csv")
 print(data.head())
 
 
-# In[2]:
-
 
 print(data.describe())
 
 
-# In[6]:
+
 
 
 fig = px.scatter(data,x='Price',y = 'Revenue generated',color='Product type',hover_data = ['Number of products sold'],trendline="ols")
 fig.show()
 
 
-# In[9]:
 
 
 sales_data = data.groupby('Product type')['Number of products sold'].sum().reset_index()
@@ -42,7 +35,7 @@ pie_chart.update_traces(textposition='inside', textinfo='percent+label')
 pie_chart.show()
 
 
-# In[11]:
+
 
 
 total_revenue = data.groupby('Shipping carriers')['Revenue generated'].sum().reset_index()
@@ -57,8 +50,6 @@ fig.update_layout(title='Total Revenue by Shipping Carrier',
 fig.show()
 
 
-# In[12]:
-
 
 avg_lead_time = data.groupby('Product type')['Lead time'].mean().reset_index()
 avg_manufacturing_costs = data.groupby('Product type')['Manufacturing costs'].mean().reset_index()
@@ -67,7 +58,6 @@ result.rename(columns={'Lead time': 'Average Lead Time', 'Manufacturing costs': 
 print(result)
 
 
-# In[13]:
 
 
 revenue_chart = px.line(data, x='SKU', 
@@ -76,7 +66,7 @@ revenue_chart = px.line(data, x='SKU',
 revenue_chart.show()
 
 
-# In[14]:
+
 
 
 stock_chart = px.line(data, x='SKU', 
@@ -85,7 +75,7 @@ stock_chart = px.line(data, x='SKU',
 stock_chart.show()
 
 
-# In[15]:
+
 
 
 order_quantity_chart = px.bar(data, x='SKU', 
@@ -94,7 +84,7 @@ order_quantity_chart = px.bar(data, x='SKU',
 order_quantity_chart.show()
 
 
-# In[16]:
+
 
 
 shipping_cost_chart = px.bar(data, x='Shipping carriers', 
@@ -103,7 +93,7 @@ shipping_cost_chart = px.bar(data, x='Shipping carriers',
 shipping_cost_chart.show()
 
 
-# In[17]:
+
 
 
 transportation_chart = px.pie(data, 
@@ -115,7 +105,6 @@ transportation_chart = px.pie(data,
 transportation_chart.show()
 
 
-# In[18]:
 
 
 defect_rates_by_product = data.groupby('Product type')['Defect rates'].mean().reset_index()
@@ -125,7 +114,7 @@ fig = px.bar(defect_rates_by_product, x='Product type', y='Defect rates',
 fig.show()
 
 
-# In[19]:
+
 
 
 pivot_table = pd.pivot_table(data, values='Defect rates', 
@@ -140,7 +129,6 @@ transportation_chart = px.pie(values=pivot_table["Defect rates"],
 transportation_chart.show()
 
 
-# In[ ]:
 
 
 
